@@ -1,13 +1,15 @@
 '''
 Titulo: Cambio minimo de monedas
 Descripcion: Este programa regresa el cambio minimo que se puede regresar de un valor que el usuario digita
-Fecha: 5 de mayo del 2022
+Fecha: 2 de mayo del 2022
 Autor: Espinoza Bautista Daniel
 '''
 
+# Importamos las librerias
 from time import time
 
-def findMin(V):
+# Definimos la funcion de cambio
+def cambio(V):
       
     # Denominacion de las monedas a utilizar
     deno = [1, 2, 5, 10]
@@ -27,19 +29,39 @@ def findMin(V):
   
         i -= 1
   
-    # Imprimimos los resultados
+    # Realizamos el conteo de monedas de cambio
+    count_10=0
+    count_5=0
+    count_2=0
+    count_1=0
     for i in range(len(ans)):
-        print(ans[i])
+        if ans[i]==10:
+            count_10+=1
+        if ans[i]==5:
+            count_5+=1
+        if ans[i]==2:
+            count_2+=1
+        if ans[i]==1:
+            count_1+=1
+    
+    # Imprimimos las monedas
+    print("Monedas de 10: "+str(count_10))
+    print("Monedas de 5: "+str(count_5))
+    print("Monedas de 2: "+str(count_2))
+    print("Monedas de 1: "+str(count_1))
+    print("\n")
   
-if __name__ == '__main__':
-    print("Cantidad para regresar cambio")
-    n = int(input())
+# Pedimos la cantidad
+print("Cantidad para regresar cambio")
+n = int(input())
 
-    tiempo_in = time()
+# Inicializamos la variable para contar el tiempo de ejecucion
+tiempo_in = time()
 
-    print("La cantidad minima de cambio para la cantidad", n, ": ")
-    findMin(n)
+# Realizamos el calculo del cambio y lo imprimimos en pantalla
+print("La cantidad minima de cambio para la cantidad", n, ": \n")
+cambio(n)
 
-    tiempo_fin = time() - tiempo_in
-
-    print("Tiempo de ejecucion: %.10f segundos." %tiempo_fin)
+# Calculamos el tiempo que tarda en ejecutarse y lo imprimimos en pantalla
+tiempo_fin = time() - tiempo_in
+print("Tiempo de ejecucion: %.10f segundos." %tiempo_fin)

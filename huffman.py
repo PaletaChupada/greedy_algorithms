@@ -1,10 +1,13 @@
 '''
 Titulo: Codigo de Huffman
 Descripcion: Este programa realiza el codigo de Huffman, este codigo lo que realiza es añadirle el codigo binario mas pequeño a la letra con mayor concurrencia y el mayor a la letra con menor concurrencia
-Fecha: 5 de Mayo del 2022
+Fecha: 2 de Mayo del 2022
 Autor: Espinoza Bautista Daniel asdfafas
 '''
- 
+
+# Importamos la libreria de tiempo
+from time import time
+
 # Creamos la clase nodo
 class node:
     def __init__(self, freq, symbol, left=None, right=None):
@@ -40,31 +43,43 @@ def printNodes(node, val=''):
         print(f"{node.symbol} -> {newVal}")
  
  
-# Solicitamos el tamaño del arreglo de caracteres
-tam = int(input("Dame el tamaño del arreglo de caracteres: "))
+# Solicitamos la cadena de la cual contaremos los carecteres
+print("Dame la cadena:")
+cadena = input()
+print("\n")
 
-# Inicializamos el arreglo
+# Inicializamos el arreglo de frecuencias y caracteres
+freq = []
 chars = []
 
-# Realizamos el llenado del arreglo
-i=0
-while i<tam:
-    aux = input("Dame el caracter: ")
-    chars.append(aux)
-    i += 1
+# Contamos los caracteres mayusculas y anexamos a los arreglos
+aux_ascii= 65
+while aux_ascii < 91:
+    if chr(aux_ascii) in cadena:
+        freq.append(cadena.count(chr(aux_ascii)))
+        chars.append(chr(aux_ascii))
+    aux_ascii+=1
 
-# Inicializamos el arreglo de frecuencias
-freq = []
+# Contamos los caracteres minusculas y anexamos a los arreglos
+aux_ascii= 97
+while aux_ascii < 123:
+    if chr(aux_ascii) in cadena:
+        freq.append(cadena.count(chr(aux_ascii)))
+        chars.append(chr(aux_ascii))
+    aux_ascii+=1
 
-# Realizamos el llenado del arreglo de frecuencias
-i=0
-while i<tam:
-    aux=int(input("Dame la frecuencia del caracter: "))
-    freq.append(aux)
-    i += 1
+# Imprimimos los arreglos ordenados de menor a mayor
+print("Caracteres obtenidos de la cadena: ")
+print(chars)
+print("Concurrencia de los carateres obtenidos: ")
+print(freq)
+print("\n")
 
 # Inicializamos los nodos
 nodes = []
+
+# Inicializamos la variable para contar el tiempo de ejecucion
+tiempo_in = time()
  
 # Convertimos los caracteres y las frecuencias
 # En nodos del arbol de Huffman
@@ -96,4 +111,10 @@ while len(nodes) > 1:
     nodes.append(newNode)
  
 # Imprimimos el arbol
+print("Codigo de Huffman: ")
 printNodes(nodes[0])
+print("\n")
+
+# Calculamos el tiempo que tarda en ejecutarse y lo imprimimos en pantalla
+tiempo_fin = time() - tiempo_in
+print("Tiempo de ejecucion: %.10f segundos." %tiempo_fin)
